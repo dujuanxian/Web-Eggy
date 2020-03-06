@@ -1,8 +1,9 @@
 import React from 'react';
+import './Editor.scss'
 
 function Editor(props) {
   return (
-    <section>
+    <section className='Editor'>
       Editor
     </section>
   );

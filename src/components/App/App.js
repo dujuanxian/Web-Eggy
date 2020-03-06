@@ -15,8 +15,13 @@ function App() {
 
       <main>
         <section className='player-container'>
-          <PlayerResult/>
-          <PlayerAnswer/>
+          <section className='player-section'>
+            <PlayerResult/>
+          </section>
+
+          <section className='player-section'>
+            <PlayerAnswer/>
+          </section>
         </section>
         <section className='editor-container'>
           <Editor/>

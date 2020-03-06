@@ -1,8 +1,11 @@
 import React from 'react';
+import './PlayerResult.scss';
 
 function PlayerResult(props) {
   return (
-    <section>Player Result</section>
+    <section className='PlayerResult'>
+      Player Result
+    </section>
   );
 }
 

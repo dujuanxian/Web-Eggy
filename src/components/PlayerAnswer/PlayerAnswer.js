@@ -1,8 +1,9 @@
 import React from 'react';
+import './PlayerAnswer.scss';
 
 function PlayerAnswer(props) {
   return (
-    <section>
+    <section className='PlayerAnswer'>
       PlayerAnswer
     </section>
   );

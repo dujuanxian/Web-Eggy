@@ -1,4 +1,10 @@
 .App {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  width: 100%;
+
   .header {
     display: flex;
     align-items: center;
@@ -10,6 +16,28 @@
     .logo {
       width: 40px;
       height: auto;
+    }
+  }
+
+  main {
+    display: flex;
+    width: 100%;
+    height: 100%;
+
+    .player-container {
+      display: flex;
+      flex-direction: column;
+      width: 40%;
+      height: 100%;
+
+      .player-section {
+        height: 50%;
+      }
+    }
+
+    .editor-container {
+      width: 60%;
+      height: 100%;
     }
   }
 }
