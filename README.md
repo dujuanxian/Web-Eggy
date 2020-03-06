@@ -9,4 +9,5 @@ CSS online learning game for novice to practice CSS Basic Skills
 5. Check code answer
 6. Show validate message
 7. Add questions for quiz
-8. Get questions from API    
+8. Get questions from API
+9. Add hint for code    

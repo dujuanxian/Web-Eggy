@@ -5,6 +5,7 @@
   "dependencies": {
     "node-sass": "^4.13.1",
     "react": "^16.13.0",
+    "react-ace": "^8.0.0",
     "react-dom": "^16.13.0",
     "react-scripts": "3.4.0"
   },
