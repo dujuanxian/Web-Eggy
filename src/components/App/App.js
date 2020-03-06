@@ -1,6 +1,9 @@
 import React from 'react';
 import logo from '../../assets/svgs/logo.svg';
 import './App.css';
+import PlayerResult from "../PlayerResult/PlayerResult";
+import PlayerAnswer from "../PlayerAnswer/PlayerAnswer";
+import Editor from "../Editor/Editor";
 
 function App() {
   return (
@@ -9,6 +12,16 @@ function App() {
         <img src={logo} className="logo" alt="logo" />
         <h1>SS Game</h1>
       </header>
+
+      <main>
+        <section className='player-container'>
+          <PlayerResult/>
+          <PlayerAnswer/>
+        </section>
+        <section className='editor-container'>
+          <Editor/>
+        </section>
+      </main>
     </div>
   );
 }
