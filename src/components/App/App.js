@@ -10,10 +10,15 @@ class App extends Component {
   constructor(props, context) {
     super(props, context);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.state = {
+      code: ''
+    };
   }
 
   handleSubmit(code) {
-    alert(code);
+    this.setState({
+      code
+    });
   }
 
   render() {
@@ -27,7 +32,7 @@ class App extends Component {
         <main>
           <section className='player-container'>
             <section className='player-section'>
-              <PlayerAnswer/>
+              <PlayerAnswer code={this.state.code}/>
             </section>
 
             <section className='player-section'>
