@@ -11,6 +11,7 @@ class CodeEditor extends Component {
   }
 
   render() {
+    const { code, onChange } = this.props;
     return (
       <div className='CodeEditor'>
         <AceEditor
@@ -23,9 +24,8 @@ class CodeEditor extends Component {
           width="100%"
           height="100%"
           onLoad={CodeEditor.onLoad}
-          value={`.box {
-  // your code here
-}`}
+          onChange={onChange}
+          value={code}
           setOptions={{
             enableBasicAutocompletion: false,
             enableLiveAutocompletion: false,
