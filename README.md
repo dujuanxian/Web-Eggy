@@ -1,4 +1,4 @@
-CSS Quiz Generator for learning and testing CSS Basic Skills
+CSS online learning game for novice to practice CSS Basic Skills
 
 
 #### TODO List:
