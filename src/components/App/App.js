@@ -16,11 +16,11 @@ function App() {
       <main>
         <section className='player-container'>
           <section className='player-section'>
-            <PlayerResult/>
+            <PlayerAnswer/>
           </section>
 
           <section className='player-section'>
-            <PlayerAnswer/>
+            <PlayerResult/>
           </section>
         </section>
         <section className='editor-container'>

@@ -4,7 +4,8 @@ import './PlayerResult.scss';
 function PlayerResult(props) {
   return (
     <section className='PlayerResult'>
-      Player Result
+      <div className="box">
+      </div>
     </section>
   );
 }
