@@ -3,10 +3,12 @@ import './Editor.scss'
 import CodeEditor from "./CodeEditor/CodeEditor";
 
 function Editor(props) {
+  const { question, description, code } = props.game;
   return (
     <section className='Editor'>
-      <h2>Set Background Color for box</h2>
-      <CodeEditor code={props.code} onChange={props.onChange}/>
+      <h2>{question}</h2>
+      <p dangerouslySetInnerHTML={{__html: description}}/>
+      <CodeEditor code={`${code}`} onChange={props.onChange}/>
       <footer>
         <button className='submit-button' onClick={props.onSubmit}>Submit</button>
       </footer>
