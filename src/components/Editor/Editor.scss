@@ -7,6 +7,14 @@
   box-sizing: border-box;
   border-left: 2px solid lightgray;
 
+  h2 {
+    margin-bottom: 0;
+  }
+
+  p {
+    margin-top: 10px;
+  }
+
   footer {
     display: flex;
     justify-content: flex-end;

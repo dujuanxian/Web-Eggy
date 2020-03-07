@@ -2,14 +2,14 @@ CSS online learning game for novice to practice CSS Basic Skills
 
 
 #### TODO List:
-1. Layout for quiz UI
-2. Display questions and result demo
-3. Container to submit code answer
-4. Display answer demo
-5. Check code answer
-6. Show validate message
-7. Add questions for quiz
-8. Get questions from API
-9. Add hint for code
-10. Format submitted css code
-11. Check class name    
+- [x] Layout for quiz UI
+- [x] Display questions and result demo
+- [x] Container to submit code answer
+- [x] Display answer demo
+- [x] Check code answer
+- [x] Show validate message
+- [x] Add questions for quiz
+- [x] Get questions from API
+- [ ] Add hint for code
+- [ ] Format submitted css code
+- [ ] Check class name    
