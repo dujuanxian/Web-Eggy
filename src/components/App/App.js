@@ -3,6 +3,7 @@ import logo from '../../assets/svgs/logo.svg';
 import './App.scss';
 import Output from "../Output/Output";
 import Editor from "../Editor/Editor";
+import {errorAlert, successAlert} from "../../utils/alert";
 
 const answerBoxRef = React.createRef();
 const resultBoxRef = React.createRef();
@@ -23,8 +24,8 @@ class App extends Component {
     const answerStyles = getComputedStyle(answerBoxRef.current);
     const resultStyles = getComputedStyle(resultBoxRef.current);
     answerStyles.backgroundColor === resultStyles.backgroundColor ?
-      alert('Success') :
-      alert('Failure')
+      successAlert() :
+      errorAlert()
   }
 
   handleCodeChange(code) {
