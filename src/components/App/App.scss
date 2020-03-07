@@ -30,7 +30,12 @@
       width: 100%;
       height: 100%;
 
-      .player-section {
+      .player-answer {
+        height: 50%;
+        border-bottom: 2px solid lightgray;
+      }
+
+      .player-result {
         height: 50%;
       }
     }

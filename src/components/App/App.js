@@ -1,27 +1,41 @@
 import React, {Component} from 'react';
 import logo from '../../assets/svgs/logo.svg';
 import './App.scss';
-import PlayerResult from "../PlayerResult/PlayerResult";
-import PlayerAnswer from "../PlayerAnswer/PlayerAnswer";
+import Output from "../Output/Output";
 import Editor from "../Editor/Editor";
+
+const answerBoxRef = React.createRef();
+const resultBoxRef = React.createRef();
 
 class App extends Component {
 
   constructor(props, context) {
     super(props, context);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleCodeChange = this.handleCodeChange.bind(this);
     this.state = {
-      code: ''
+      answer: `.box {\n\t// your code here\n}`,
+      result: '.box {background-color: indianred}'
     };
   }
 
-  handleSubmit(code) {
+  handleSubmit() {
+    const answerStyles = getComputedStyle(answerBoxRef.current);
+    const resultStyles = getComputedStyle(resultBoxRef.current);
+    answerStyles.backgroundColor === resultStyles.backgroundColor ?
+      alert('Success') :
+      alert('Failure')
+  }
+
+  handleCodeChange(code) {
     this.setState({
-      code
+      answer: code
     });
   }
 
   render() {
+    const { answer, result } = this.state;
+
     return (
       <div className="App">
         <header className="header">
@@ -31,16 +45,18 @@ class App extends Component {
 
         <main>
           <section className='player-container'>
-            <section className='player-section'>
-              <PlayerAnswer code={this.state.code}/>
+            <section className='player-answer'>
+              <Output code={answer} ref={answerBoxRef}/>
             </section>
 
-            <section className='player-section'>
-              <PlayerResult/>
+            <section className='player-result'>
+              <Output code={result} ref={resultBoxRef}/>
             </section>
           </section>
           <section className='editor-container'>
-            <Editor onSubmit={this.handleSubmit}/>
+            <Editor code={answer}
+                    onChange={this.handleCodeChange}
+                    onSubmit={this.handleSubmit}/>
           </section>
         </main>
       </div>

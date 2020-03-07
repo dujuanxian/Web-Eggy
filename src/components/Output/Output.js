@@ -1,20 +1,19 @@
 import React from 'react';
-import './PlayerAnswer.scss';
+import './Output.scss';
 import styled from 'styled-components';
 
 function getBoxStyle(code) {
   return /[^{\}]+(?=})/.exec(code);
 }
 
-function PlayerAnswer(props) {
+const Output = React.forwardRef((props, ref) => {
   const Box = styled.div`${getBoxStyle(props.code)}`;
 
   return (
-    <section className='PlayerAnswer'>
-      <Box className="box">
-      </Box>
+    <section className='Output'>
+      <Box className="box" ref={ref} />
     </section>
   );
-}
+});
 
-export default PlayerAnswer;
+export default Output;
