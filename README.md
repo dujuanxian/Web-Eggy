@@ -1,4 +1,4 @@
-CSS online learning game for novice to practice CSS Basic Skills
+Web Eggy - Games for learning Web CSS
 
 
 #### TODO List:
@@ -10,6 +10,7 @@ CSS online learning game for novice to practice CSS Basic Skills
 - [x] Show validate message
 - [x] Add questions for quiz
 - [x] Get questions from API
+- [x] Get result box html from SSR-Eggy
 - [ ] Add hint for code
 - [ ] Format submitted css code
 - [ ] Check class name    

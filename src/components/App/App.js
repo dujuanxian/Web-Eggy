@@ -4,7 +4,7 @@ import './App.scss';
 import Output from "../Output/Output";
 import Editor from "../Editor/Editor";
 import {errorAlert, successAlert} from "../../utils/alert";
-import {getCSSGames} from "../../utils/API";
+import {getCSSGames, getCSSResult} from "../../utils/API";
 
 const answerBoxRef = React.createRef();
 const resultBoxRef = React.createRef();
@@ -16,7 +16,8 @@ class App extends Component {
     this.handleCodeChange = this.handleCodeChange.bind(this);
     this.state = {
       games: [],
-      current: 0
+      current: 0,
+      html: ''
     };
   }
 
@@ -26,6 +27,14 @@ class App extends Component {
         this.setState({
           games: response
         });
+
+        getCSSResult(response[this.state.current].id)
+          .then(html => {
+            this.setState({
+              html
+            });
+          })
+          .catch(console.error);
       });
   }
 
@@ -46,8 +55,8 @@ class App extends Component {
   }
 
   render() {
-    const { games, current } = this.state;
-    const currentGame = games.length > 0 ? games[current] : {};
+    const currentGame = this.state.games.length > 0 ?
+      this.state.games[this.state.current] : {};
 
     return (
       <div className="App">
@@ -63,7 +72,7 @@ class App extends Component {
             </section>
 
             <section className='player-result'>
-              <Output code={currentGame.result} ref={resultBoxRef}/>
+              <div dangerouslySetInnerHTML={{__html: this.state.html}}/>
             </section>
           </section>
           <section className='editor-container'>
