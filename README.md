@@ -13,4 +13,5 @@ Web Eggy - Games for learning Web CSS
 - [x] Get result box html from SSR-Eggy
 - [ ] Add hint for code
 - [ ] Format submitted css code
-- [ ] Check class name    
+- [ ] Check class name 
+- [ ] Get common style from server   
