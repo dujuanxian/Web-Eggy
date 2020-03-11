@@ -39,7 +39,8 @@ class App extends Component {
 
   static handleSubmit() {
     const answerStyles = getComputedStyle(answerBoxRef.current);
-    const resultStyles = getComputedStyle(resultBoxRef.current);
+    const resultStyles = getComputedStyle(resultBoxRef.current.getElementsByClassName('box')[0]);
+    //TODO: need to check answer result at backend
     answerStyles.backgroundColor === resultStyles.backgroundColor ?
       successAlert() :
       errorAlert()
