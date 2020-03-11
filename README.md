@@ -16,5 +16,5 @@ Web Eggy - Games for learning Web CSS
 - [ ] Format submitted css code
 - [ ] Get class name from API 
 - [ ] Check class name 
-- [ ] Get common style from server
+- [x] Get common style from server
 - [ ] Check answer at backend service   

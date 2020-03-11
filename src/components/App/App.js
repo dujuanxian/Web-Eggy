@@ -68,7 +68,7 @@ class App extends Component {
         <main>
           <section className='player-container'>
             <section className='player-answer'>
-              <Output code={game.code} ref={answerBoxRef}/>
+              <Output style={game.baseStyle} code={game.code} ref={answerBoxRef}/>
             </section>
 
             <section className='player-result'>

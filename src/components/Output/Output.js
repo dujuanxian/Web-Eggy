@@ -7,7 +7,9 @@ const Output = React.forwardRef((props, ref) => {
     <section className='Output'>
       {
         Style.it(
-          `${props.code}`,
+          `${props.code}
+           ${props.style}
+          `,
           <div className='box' ref={ref}/>)
       }
     </section>
