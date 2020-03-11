@@ -3,7 +3,7 @@ import './Editor.scss'
 import CodeEditor from "./CodeEditor/CodeEditor";
 
 function Editor(props) {
-  const { question, description, code } = props.game;
+  const { question, description, code } = props;
   return (
     <section className='Editor'>
       <h2>{question}</h2>

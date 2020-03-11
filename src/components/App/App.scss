@@ -18,40 +18,5 @@
       height: auto;
     }
   }
-
-  main {
-    display: flex;
-    width: 100%;
-    height: 100%;
-
-    .player-container {
-      display: flex;
-      flex-direction: column;
-      width: 100%;
-      height: 100%;
-
-      .player-answer {
-        height: 50%;
-        border-bottom: 2px solid lightgray;
-      }
-
-      .player-result {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        height: 50%;
-      }
-    }
-
-    .editor-container {
-      width: 800px;
-      height: 100%;
-    }
-  }
 }
 
-@media screen and (min-width: 1080px) {
-  .App main .editor-container {
-    width: 1000px;
-  }
-}

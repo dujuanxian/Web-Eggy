@@ -1,62 +1,41 @@
 import React, {Component} from 'react';
 import logo from '../../assets/svgs/logo.svg';
 import './App.scss';
-import Output from "../Output/Output";
-import Editor from "../Editor/Editor";
-import {errorAlert, successAlert} from "../../utils/alert";
-import {getGame, getResultHtml} from "../../utils/API";
-
-const answerBoxRef = React.createRef();
-const resultBoxRef = React.createRef();
+import {getGames} from "../../utils/API";
+import Game from "../Game/Game";
 
 class App extends Component {
 
   constructor(props, context) {
     super(props, context);
-    this.handleCodeChange = this.handleCodeChange.bind(this);
     this.state = {
-      game: {},
-      current: 1,
-      html: ''
+      games: [],
+      current: 0,
+      game: {}
     };
+    this.handleGameSuccess = this.handleGameSuccess.bind(this);
   }
 
   componentDidMount() {
-    getGame(this.state.current)
-      .then(game => {
+    getGames()
+      .then(games => {
         this.setState({
-          game
+          games,
+          game: games[this.state.current]
         });
       });
-    getResultHtml(this.state.current)
-      .then(html => {
-        this.setState({
-          html
-        });
-      })
-      .catch(console.error);
   }
 
-  static handleSubmit() {
-    const answerStyles = getComputedStyle(answerBoxRef.current);
-    const resultStyles = getComputedStyle(resultBoxRef.current.getElementsByClassName('box')[0]);
-    //TODO: need to check answer result at backend
-    answerStyles.backgroundColor === resultStyles.backgroundColor ?
-      successAlert() :
-      errorAlert()
-  }
-
-  handleCodeChange(code) {
+  handleGameSuccess() {
+    const current = this.state.current + 1;
     this.setState({
-      game: {
-        ...this.state.game,
-        code
-      }
+      current,
+      game: this.state.games[current]
     });
   }
 
   render() {
-    const {game} = this.state;
+    const { game } = this.state;
 
     return (
       <div className="App">
@@ -65,22 +44,9 @@ class App extends Component {
           <h1>SS Game</h1>
         </header>
 
-        <main>
-          <section className='player-container'>
-            <section className='player-answer'>
-              <Output style={game.baseStyle} code={game.code} ref={answerBoxRef}/>
-            </section>
-
-            <section className='player-result'>
-              <div ref={resultBoxRef} dangerouslySetInnerHTML={{__html: this.state.html}}/>
-            </section>
-          </section>
-          <section className='editor-container'>
-            <Editor game={game}
-                    onChange={this.handleCodeChange}
-                    onSubmit={App.handleSubmit}/>
-          </section>
-        </main>
+        { game && game.id ?
+          <Game value={game} onSuccess={this.handleGameSuccess} /> : null
+        }
       </div>
     );
   }

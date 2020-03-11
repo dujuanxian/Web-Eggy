@@ -7,9 +7,9 @@ const MySwal = withReactContent(Swal);
 function successAlert() {
   return MySwal.fire({
     icon: 'success',
-    title: 'Your work has been saved',
-    showConfirmButton: false,
-    timer: 1500
+    title: 'Congratulations! Great job you have done!',
+    confirmButtonColor: 'mediumseagreen',
+    confirmButtonText: 'New Level'
   });
 }
 
