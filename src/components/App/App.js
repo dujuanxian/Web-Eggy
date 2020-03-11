@@ -4,7 +4,7 @@ import './App.scss';
 import Output from "../Output/Output";
 import Editor from "../Editor/Editor";
 import {errorAlert, successAlert} from "../../utils/alert";
-import {getCSSGames, getCSSResult} from "../../utils/API";
+import {getGame, getResultHtml} from "../../utils/API";
 
 const answerBoxRef = React.createRef();
 const resultBoxRef = React.createRef();
@@ -15,27 +15,26 @@ class App extends Component {
     super(props, context);
     this.handleCodeChange = this.handleCodeChange.bind(this);
     this.state = {
-      games: [],
-      current: 0,
+      game: {},
+      current: 1,
       html: ''
     };
   }
 
   componentDidMount() {
-    getCSSGames()
-      .then(response => {
+    getGame(this.state.current)
+      .then(game => {
         this.setState({
-          games: response
+          game
         });
-
-        getCSSResult(response[this.state.current].id)
-          .then(html => {
-            this.setState({
-              html
-            });
-          })
-          .catch(console.error);
       });
+    getResultHtml(this.state.current)
+      .then(html => {
+        this.setState({
+          html
+        });
+      })
+      .catch(console.error);
   }
 
   static handleSubmit() {
@@ -47,16 +46,16 @@ class App extends Component {
   }
 
   handleCodeChange(code) {
-    const games = this.state.games;
-    games[this.state.current].code = code;
     this.setState({
-      games
+      game: {
+        ...this.state.game,
+        code
+      }
     });
   }
 
   render() {
-    const currentGame = this.state.games.length > 0 ?
-      this.state.games[this.state.current] : {};
+    const {game} = this.state;
 
     return (
       <div className="App">
@@ -68,15 +67,15 @@ class App extends Component {
         <main>
           <section className='player-container'>
             <section className='player-answer'>
-              <Output code={currentGame.code} ref={answerBoxRef}/>
+              <Output code={game.code} ref={answerBoxRef}/>
             </section>
 
             <section className='player-result'>
-              <div dangerouslySetInnerHTML={{__html: this.state.html}}/>
+              <div ref={resultBoxRef} dangerouslySetInnerHTML={{__html: this.state.html}}/>
             </section>
           </section>
           <section className='editor-container'>
-            <Editor game={currentGame}
+            <Editor game={game}
                     onChange={this.handleCodeChange}
                     onSubmit={App.handleSubmit}/>
           </section>

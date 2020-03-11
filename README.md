@@ -11,7 +11,10 @@ Web Eggy - Games for learning Web CSS
 - [x] Add questions for quiz
 - [x] Get questions from API
 - [x] Get result box html from SSR-Eggy
+- [x] Get games by id
 - [ ] Add hint for code
 - [ ] Format submitted css code
+- [ ] Get class name from API 
 - [ ] Check class name 
-- [ ] Get common style from server   
+- [ ] Get common style from server
+- [ ] Check answer at backend service   
