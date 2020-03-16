@@ -10,8 +10,7 @@ class App extends Component {
     super(props, context);
     this.state = {
       games: [],
-      current: 0,
-      game: {}
+      current: 0
     };
     this.handleGameSuccess = this.handleGameSuccess.bind(this);
   }
@@ -20,8 +19,7 @@ class App extends Component {
     getGames()
       .then(games => {
         this.setState({
-          games,
-          game: games[this.state.current]
+          games
         });
       });
   }
@@ -29,13 +27,12 @@ class App extends Component {
   handleGameSuccess() {
     const current = this.state.current + 1;
     this.setState({
-      current,
-      game: this.state.games[current]
+      current
     });
   }
 
   render() {
-    const { game } = this.state;
+    const { games, current } = this.state;
 
     return (
       <div className="App">
@@ -44,8 +41,9 @@ class App extends Component {
           <h1>SS Game</h1>
         </header>
 
-        { game && game.id ?
-          <Game value={game} onSuccess={this.handleGameSuccess} /> : null
+        { games[current] ?
+          <Game game={games[current]}
+                onSuccess={this.handleGameSuccess} /> : null
         }
       </div>
     );

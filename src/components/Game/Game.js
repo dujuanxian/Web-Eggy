@@ -13,23 +13,34 @@ class Game extends Component {
     super(props, context);
     this.handleCodeChange = this.handleCodeChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.setResultHtml = this.setResultHtml.bind(this);
     this.state = {
-      code: this.props.value.code,
+      code: this.props.game.code,
       html: ''
     };
   }
 
   componentDidMount() {
-    const game = this.props.value;
-    if (game.id) {
-      getResultHtml(game.id)
-        .then(html => {
-          this.setState({
-            html
-          });
-        })
-        .catch(console.error);
+    this.setResultHtml();
+  }
+
+  componentDidUpdate(prevProps) {
+    if (prevProps.game.id !== this.props.game.id) {
+      this.setState({
+        code: this.props.game.code
+      });
+      this.setResultHtml();
     }
+  }
+
+  setResultHtml() {
+    getResultHtml(this.props.game.id)
+      .then(html => {
+        this.setState({
+          html
+        });
+      })
+      .catch(console.error);
   }
 
   handleSubmit() {
@@ -48,8 +59,8 @@ class Game extends Component {
   }
 
   render() {
-    const game = this.props.value;
-    const code = this.state.code;
+    const {game} = this.props;
+    const {code, html} = this.state;
     return (
       <main className='Game'>
         <section className='player-container'>
@@ -58,7 +69,7 @@ class Game extends Component {
           </section>
 
           <section className='player-result'>
-            <div ref={resultBoxRef} dangerouslySetInnerHTML={{__html: this.state.html}}/>
+            <div ref={resultBoxRef} dangerouslySetInnerHTML={{__html: html}}/>
           </section>
         </section>
         <section className='editor-container'>
