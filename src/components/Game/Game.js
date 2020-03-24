@@ -2,11 +2,18 @@ import React, {Component} from 'react';
 import Output from "../Output/Output";
 import Editor from "../Editor/Editor";
 import {getResultHtml} from "../../utils/API";
-import {errorAlert, successAlert} from "../../utils/alert";
 import './Game.scss';
+import postcss from 'postcss';
+import cssParser from 'postcss-scss';
+import stripInlineComments from 'postcss-strip-inline-comments';
+import discardComments from 'postcss-discard-comments';
+import shorthandExpand from 'postcss-shorthand-expand';
 
 const answerBoxRef = React.createRef();
-const resultBoxRef = React.createRef();
+
+function getBoxStyle(code) {
+  return /[^{\}]+(?=})/.exec(code);
+}
 
 class Game extends Component {
   constructor(props, context) {
@@ -44,12 +51,14 @@ class Game extends Component {
   }
 
   handleSubmit() {
-    const answerStyles = getComputedStyle(answerBoxRef.current);
-    const resultStyles = getComputedStyle(resultBoxRef.current.getElementsByClassName('box')[0]);
-    //TODO: need to check answer result at backend
-    answerStyles.backgroundColor === resultStyles.backgroundColor ?
-      successAlert().then(this.props.onSuccess):
-      errorAlert()
+    postcss([
+      stripInlineComments,
+      discardComments({removeAllButFirst: true}),
+      shorthandExpand()
+    ]).process(this.state.code, { parser: cssParser }).then(result => {
+      answerBoxRef.current.style.cssText = getBoxStyle(result.css)[0].trim();
+      console.log(answerBoxRef.current.style)
+    });
   }
 
   handleCodeChange(code) {
@@ -65,11 +74,11 @@ class Game extends Component {
       <main className='Game'>
         <section className='player-container'>
           <section className='player-answer'>
-            <Output style={game.baseStyle} code={code} ref={answerBoxRef}/>
+            <Output style={game.baseStyle} ref={answerBoxRef}/>
           </section>
 
           <section className='player-result'>
-            <div ref={resultBoxRef} dangerouslySetInnerHTML={{__html: html}}/>
+            <div dangerouslySetInnerHTML={{__html: html}}/>
           </section>
         </section>
         <section className='editor-container'>

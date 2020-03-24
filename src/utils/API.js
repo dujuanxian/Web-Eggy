@@ -11,13 +11,7 @@ function getResultHtml(id) {
     .then(response => response.text())
 }
 
-function getGame(id) {
-  return fetch(`${GAMES_URL}/${id}`)
-    .then(response => response.json());
-}
-
 export {
-  getGame,
   getGames,
   getResultHtml
 }
