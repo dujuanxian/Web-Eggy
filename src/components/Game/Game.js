@@ -3,17 +3,9 @@ import Output from "../Output/Output";
 import Editor from "../Editor/Editor";
 import {getResultHtml} from "../../utils/API";
 import './Game.scss';
-import postcss from 'postcss';
-import cssParser from 'postcss-scss';
-import stripInlineComments from 'postcss-strip-inline-comments';
-import discardComments from 'postcss-discard-comments';
-import shorthandExpand from 'postcss-shorthand-expand';
+import {processStyle} from "../../utils/cssParser";
 
 const answerBoxRef = React.createRef();
-
-function getBoxStyle(code) {
-  return /[^{\}]+(?=})/.exec(code);
-}
 
 class Game extends Component {
   constructor(props, context) {
@@ -51,14 +43,11 @@ class Game extends Component {
   }
 
   handleSubmit() {
-    postcss([
-      stripInlineComments,
-      discardComments({removeAllButFirst: true}),
-      shorthandExpand()
-    ]).process(this.state.code, { parser: cssParser }).then(result => {
-      answerBoxRef.current.style.cssText = getBoxStyle(result.css)[0].trim();
-      console.log(answerBoxRef.current.style)
-    });
+    processStyle(this.state.code)
+      .then(cssText => {
+        answerBoxRef.current.style.cssText = cssText;
+        console.log(answerBoxRef.current.style)
+      });
   }
 
   handleCodeChange(code) {
