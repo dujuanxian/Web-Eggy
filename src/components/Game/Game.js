@@ -3,7 +3,7 @@ import Output from "../Output/Output";
 import Editor from "../Editor/Editor";
 import {getResultHtml} from "../../utils/API";
 import './Game.scss';
-import {processStyle} from "../../utils/cssParser";
+import {parseStyle, processStyle} from "../../utils/cssParser";
 
 const answerBoxRef = React.createRef();
 
@@ -46,7 +46,8 @@ class Game extends Component {
     processStyle(this.state.code)
       .then(cssText => {
         answerBoxRef.current.style.cssText = cssText;
-        console.log(answerBoxRef.current.style)
+        const styleObj = parseStyle(answerBoxRef.current.style);
+        console.log(styleObj)
       });
   }
 
