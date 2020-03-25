@@ -15,7 +15,7 @@ function parseStyle(cssObj) {
 }
 
 function getBoxStyle(code) {
-  const styleCode = /[^{\}]+(?=})/.exec(code);
+  const styleCode = /[^{}]+(?=})/.exec(code);
   return styleCode[0].trim();
 }
 

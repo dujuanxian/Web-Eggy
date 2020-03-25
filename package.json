@@ -3,6 +3,11 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@types/ace": "0.0.43",
+    "@types/jest": "^25.1.4",
+    "@types/node": "^13.9.3",
+    "@types/react": "^16.9.25",
+    "@types/react-dom": "^16.9.5",
     "node-sass": "^4.13.1",
     "postcss": "^7.0.27",
     "postcss-discard-comments": "^4.0.2",
@@ -15,7 +20,8 @@
     "react-scripts": "3.4.0",
     "style-it": "^2.1.4",
     "sweetalert2": "^9.8.2",
-    "sweetalert2-react-content": "^3.0.1"
+    "sweetalert2-react-content": "^3.0.1",
+    "typescript": "^3.8.3"
   },
   "scripts": {
     "start": "react-scripts start",

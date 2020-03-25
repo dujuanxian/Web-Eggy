@@ -1,17 +1,25 @@
-import React, {Component} from 'react';
-import logo from '../../assets/svgs/logo.svg';
+import * as React from 'react';
+import Game from "../Game/Game";
 import './App.scss';
 import {getGames} from "../../utils/API";
-import Game from "../Game/Game";
 
-class App extends Component {
+interface State {
+  games: Array<Object>,
+  current: number
+}
 
-  constructor(props, context) {
-    super(props, context);
+interface Props {
+}
+
+class App extends React.Component<Props, State> {
+  constructor(props: Props) {
+    super(props);
+
     this.state = {
       games: [],
       current: 0
     };
+
     this.handleGameSuccess = this.handleGameSuccess.bind(this);
   }
 
@@ -24,15 +32,17 @@ class App extends Component {
       });
   }
 
-  handleGameSuccess() {
+  private handleGameSuccess() {
     const current = this.state.current + 1;
+
     this.setState({
       current
     });
   }
 
   render() {
-    const { games, current } = this.state;
+    const {games, current} = this.state;
+    const logo = require("../../assets/svgs/logo.svg"); //TODO: use import
 
     return (
       <div className="App">
@@ -41,9 +51,9 @@ class App extends Component {
           <h1>SS Game</h1>
         </header>
 
-        { games[current] ?
+        {games[current] ?
           <Game game={games[current]}
-                onSuccess={this.handleGameSuccess} /> : null
+                onSuccess={this.handleGameSuccess}/> : null
         }
       </div>
     );
