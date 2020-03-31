@@ -1,15 +1,26 @@
 import React, {Component} from 'react';
-import Output from "../Output/Output";
 import Editor from "../Editor/Editor";
 import {getResultHtml} from "../../utils/API";
 import './Game.scss';
 import {parseStyle, processStyle} from "../../utils/cssParser";
+import Output from "../Output/Output";
 
-const answerBoxRef = React.createRef();
+interface Props {
+  // game: { code: string, id: number, baseStyle: string, question: string, description: string },
+  game: any,
+  onSuccess: () => void
+}
 
-class Game extends Component {
-  constructor(props, context) {
-    super(props, context);
+interface State {
+  code: string,
+  html: string
+}
+
+const answerBoxRef = React.createRef<any>();
+
+class Game extends Component<Props, State> {
+  constructor(props: Props) {
+    super(props);
     this.handleCodeChange = this.handleCodeChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.setResultHtml = this.setResultHtml.bind(this);
@@ -19,11 +30,11 @@ class Game extends Component {
     };
   }
 
-  componentDidMount() {
+  public componentDidMount() {
     this.setResultHtml();
   }
 
-  componentDidUpdate(prevProps) {
+  public componentDidUpdate(prevProps: Props) {
     if (prevProps.game.id !== this.props.game.id) {
       this.setState({
         code: this.props.game.code
@@ -32,7 +43,7 @@ class Game extends Component {
     }
   }
 
-  setResultHtml() {
+  private setResultHtml() {
     getResultHtml(this.props.game.id)
       .then(html => {
         this.setState({
@@ -42,16 +53,22 @@ class Game extends Component {
       .catch(console.error);
   }
 
-  handleSubmit() {
+  private handleSubmit() {
     processStyle(this.state.code)
-      .then(cssText => {
-        answerBoxRef.current.style.cssText = cssText;
-        const styleObj = parseStyle(answerBoxRef.current.style);
+      .then((cssText: string) => {
+        let current = answerBoxRef.current;
+
+        if (!current) {
+          return;
+        }
+
+        current.style.cssText = cssText;
+        const styleObj = parseStyle(current.style);
         console.log(styleObj)
       });
   }
 
-  handleCodeChange(code) {
+  handleCodeChange(code: string) {
     this.setState({
       code
     });
@@ -60,11 +77,15 @@ class Game extends Component {
   render() {
     const {game} = this.props;
     const {code, html} = this.state;
+
+    // @ts-ignore
+    const output = <Output style={game.baseStyle} ref={answerBoxRef}/>;
+
     return (
       <main className='Game'>
         <section className='player-container'>
           <section className='player-answer'>
-            <Output style={game.baseStyle} ref={answerBoxRef}/>
+            {output}
           </section>
 
           <section className='player-result'>

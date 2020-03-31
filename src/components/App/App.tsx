@@ -1,7 +1,7 @@
 import * as React from 'react';
-import Game from "../Game/Game";
 import './App.scss';
 import {getGames} from "../../utils/API";
+import Game from "../Game/Game";
 
 interface State {
   games: Array<Object>,
