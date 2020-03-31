@@ -3,8 +3,16 @@ import './App.scss';
 import {getGames} from "../../utils/API";
 import Game from "../Game/Game";
 
+interface GameProps {
+  code: string,
+  id: number,
+  baseStyle: string,
+  question: string,
+  description: string
+}
+
 interface State {
-  games: Array<Object>,
+  games: Array<GameProps>,
   current: number
 }
 
@@ -23,7 +31,7 @@ class App extends React.Component<Props, State> {
     this.handleGameSuccess = this.handleGameSuccess.bind(this);
   }
 
-  componentDidMount() {
+  public componentDidMount() {
     getGames()
       .then(games => {
         this.setState({

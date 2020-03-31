@@ -5,9 +5,16 @@ import './Game.scss';
 import {parseStyle, processStyle} from "../../utils/cssParser";
 import Output from "../Output/Output";
 
+interface GameProps {
+  code: string,
+  id: number,
+  baseStyle: string,
+  question: string,
+  description: string
+}
+
 interface Props {
-  // game: { code: string, id: number, baseStyle: string, question: string, description: string },
-  game: any,
+  game: GameProps,
   onSuccess: () => void
 }
 
@@ -68,7 +75,7 @@ class Game extends Component<Props, State> {
       });
   }
 
-  handleCodeChange(code: string) {
+  private handleCodeChange(code: string) {
     this.setState({
       code
     });
