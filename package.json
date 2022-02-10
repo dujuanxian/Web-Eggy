@@ -8,7 +8,7 @@
     "@types/node": "^13.9.3",
     "@types/react": "^16.9.25",
     "@types/react-dom": "^16.9.5",
-    "node-sass": "^4.13.1",
+    "node-sass": "^7.0.0",
     "postcss": "^7.0.27",
     "postcss-discard-comments": "^4.0.2",
     "postcss-scss": "^2.0.0",
